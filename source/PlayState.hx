@@ -12,17 +12,17 @@ import flixel.util.FlxColor;
 class PlayState extends FlxState
 {
 	var tiler:FlxTiledSprite;
-	var testClip = FlxRect.get(10, 10, 125, 125);
+	var testClip = FlxRect.get(-10, -10, 0, 0);
 
 	override public function create()
 	{
 		super.create();
 
 		tiler = new FlxTiledSprite(AssetPaths.tile_base__png, 250, 150);
-		FlxTween.tween(testClip, {x: 150}, 2, {type: FlxTweenType.PINGPONG});
-		FlxTween.tween(testClip, {y: 110}, 2.3, {type: FlxTweenType.PINGPONG});
-		FlxTween.tween(testClip, {width: 25}, 1.3, {type: FlxTweenType.PINGPONG});
-		FlxTween.tween(testClip, {height: 25}, 1.76, {type: FlxTweenType.PINGPONG});
+		FlxTween.tween(testClip, {x: 260}, 2, {type: FlxTweenType.PINGPONG});
+		FlxTween.tween(testClip, {y: 160}, 2.3, {type: FlxTweenType.PINGPONG});
+		FlxTween.tween(testClip, {width: 200}, 1.3, {type: FlxTweenType.PINGPONG});
+		FlxTween.tween(testClip, {height: 125}, 1.76, {type: FlxTweenType.PINGPONG});
 		add(tiler);
 
 		DebugDraw.init();
@@ -56,7 +56,25 @@ class PlayState extends FlxState
 			tiler.y += 1;
 		}
 
-		DebugDraw.ME.drawWorldRect(testClip.x, testClip.y, testClip.width, testClip.height);
+		if (FlxG.keys.pressed.W)
+		{
+			camera.zoom += .01;
+		}
+		if (FlxG.keys.pressed.S)
+		{
+			camera.zoom -= .01;
+		}
+
+		if (FlxG.keys.pressed.E)
+		{
+			tiler.scale.scale(1.01);
+		}
+		if (FlxG.keys.pressed.D)
+		{
+			tiler.scale.scale(0.99);
+		}
+
+		DebugDraw.ME.drawWorldRect(testClip.x + tiler.x, testClip.y + tiler.y, testClip.width, testClip.height);
 		DebugDraw.ME.drawWorldRect(tiler.x, tiler.y, tiler.width, tiler.height, null, FlxColor.YELLOW);
 	}
 }
