@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxCamera;
 import flixel.FlxGame;
 import openfl.display.Sprite;
 
